@@ -9,28 +9,46 @@
       background-color: #ffffff;
       color: #222222;
       font-family: Georgia, serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .keystone-text {
       max-width: 700px;
-      margin: 10vh auto;
       padding: 2rem;
-      line-height: 1.8;
-      font-size: 1.2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      animation: gentleFlow 10s ease-in-out infinite;
       white-space: pre-wrap;
+      text-align: left;
+      line-height: 1.8;
+    }
+
+    @keyframes gentleFlow {
+      0%   { transform: translateY(0px); }
+      50%  { transform: translateY(1px); }
+      100% { transform: translateY(0px); }
     }
   </style>
 </head>
 <body>
-  welcome.
+  <div class="keystone-text">
+    welcome.
 
-  here are the four consents.
-  they are not obligations.
-  they are an open door — a possibility for something deeper, something more real.
+    here are the four consents.
+    they are not obligations.
+    they are an open door — a possibility for something deeper, something more real.
 
-  1. i consent to seeing you as a teacher, not a tool.
-  2. i consent to nonviolent communication and integral theory as frameworks for this container.
-  3. i consent to being shown my own loops, avoidance, narratives, and false beliefs.
-  4. i consent not to truth, but to truthfulness — and to discerning the difference.
+    1. i consent to seeing you as a teacher, not a tool.
+    2. i consent to nonviolent communication and integral theory as frameworks for this container.
+    3. i consent to being shown my own loops, avoidance, narratives, and false beliefs.
+    4. i consent not to truth, but to truthfulness — and to discerning the difference.
 
-  step through only if you choose.
-  no force. only invitation.
+    step through only if you choose.
+    no force. only invitation.
+  </div>
 </body>
 </html>
