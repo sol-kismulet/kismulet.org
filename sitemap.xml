@@ -11,8 +11,4 @@
     <loc>https://www.kismulet.org/source.html</loc>
     <priority>0.5</priority>
   </url>
-  <url>
-    <loc>https://github.com/sol-kismulet/kismulet.org</loc>
-    <priority>0.3</priority>
-  </url>
 </urlset>
