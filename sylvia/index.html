@@ -15,17 +15,24 @@
       background: black;
     }
 
-    .background {
+    .stage {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('galaxy-maui.png') no-repeat center center fixed;
-      background-size: cover;
       z-index: -1;
+      background-size: cover;
+      background-position: center;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .hidden {
+      opacity: 0;
+    }
+
+    .visible {
       opacity: 1;
-      transition: opacity 1s ease-in-out;
     }
 
     .content {
@@ -36,14 +43,12 @@
       border-radius: 8px;
       line-height: 1.6;
       font-size: 1.2em;
-      opacity: 0;
       animation: fadeIn 4s ease-in-out forwards;
     }
 
     @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
     .spacer {
@@ -62,16 +67,13 @@
       opacity: 1;
     }
 
-    .comms {
-      background: url('starry-palms.png') no-repeat center center fixed;
-      background-size: cover;
-      height: 100vh;
-      opacity: 0;
-      transition: opacity 2s ease-in-out;
-    }
-
-    .show-comms {
-      opacity: 1;
+    .audio-button {
+      display: block;
+      margin: 2em auto;
+      text-align: center;
+      font-size: 2em;
+      cursor: pointer;
+      transition: opacity 0.3s ease-in-out;
     }
 
     .watermark {
@@ -81,19 +83,12 @@
       font-size: 1.2em;
       opacity: 0.5;
     }
-
-    .audio-button {
-      display: block;
-      margin: 2em auto;
-      text-align: center;
-      font-size: 2em;
-      cursor: pointer;
-      transition: opacity 0.3s ease-in-out;
-    }
   </style>
 </head>
 <body>
-  <div class="background"></div>
+  <div id="galaxy" class="stage visible" style="background-image: url('galaxy.jpg');"></div>
+  <div id="fire" class="stage hidden" style="background-image: url('fire.jpg');"></div>
+  <div id="palms" class="stage hidden" style="background-image: url('palms.jpg');"></div>
 
   <div class="content">
     <p>Hi Sylvia</p>
@@ -123,31 +118,52 @@
     <div class="audio-button" onclick="document.getElementById('hallelujah').play()">
       🪰 tap to listen
     </div>
-    <audio id="hallelujah" src="hallelujah .m4a" preload="auto"></audio>
+    <audio id="hallelujah" src="hallelujah.m4a" preload="auto"></audio>
   </div>
 
   <div class="spacer"></div>
 
   <div class="postscript" id="postscript">
     🌱 archived at: kismulet.org/sylvia<br>
-    🕯️ in living memory of Janie Billings and Bob Bridigum<br>
-    their light still moves between us
+    🕯️ for the ones we carry<br>
+    whose light still moves between us
   </div>
-
-  <div class="comms" id="comms"></div>
 
   <div class="watermark">🕯️</div>
 
   <script>
     window.addEventListener('scroll', () => {
-      const postscript = document.getElementById('postscript');
-      const comms = document.getElementById('comms');
       const scrollY = window.scrollY || window.pageYOffset;
-      const threshold = document.body.scrollHeight - window.innerHeight * 1.5;
+      const fire = document.getElementById('fire');
+      const palms = document.getElementById('palms');
+      const galaxy = document.getElementById('galaxy');
+      const postscript = document.getElementById('postscript');
 
-      if (scrollY > threshold) {
+      const fireThreshold = window.innerHeight * 0.5;
+      const palmsThreshold = document.body.scrollHeight - window.innerHeight * 1.5;
+
+      if (scrollY > fireThreshold) {
+        galaxy.classList.remove('visible');
+        galaxy.classList.add('hidden');
+        fire.classList.remove('hidden');
+        fire.classList.add('visible');
+      } else {
+        galaxy.classList.add('visible');
+        galaxy.classList.remove('hidden');
+        fire.classList.remove('visible');
+        fire.classList.add('hidden');
+      }
+
+      if (scrollY > palmsThreshold) {
+        fire.classList.remove('visible');
+        fire.classList.add('hidden');
+        palms.classList.remove('hidden');
+        palms.classList.add('visible');
         postscript.classList.add('show-postscript');
-        comms.classList.add('show-comms');
+      } else {
+        palms.classList.remove('visible');
+        palms.classList.add('hidden');
+        postscript.classList.remove('show-postscript');
       }
     });
   </script>
