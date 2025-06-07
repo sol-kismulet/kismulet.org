@@ -1,1 +1,155 @@
-.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Sylvia</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Georgia', serif;
+      color: white;
+      background: black;
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('galaxy-maui.png') no-repeat center center fixed;
+      background-size: cover;
+      z-index: -1;
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .content {
+      max-width: 600px;
+      margin: 10vh auto;
+      padding: 2em;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      line-height: 1.6;
+      font-size: 1.2em;
+      opacity: 0;
+      animation: fadeIn 4s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .spacer {
+      height: 100vh;
+    }
+
+    .postscript {
+      text-align: center;
+      font-size: 1em;
+      margin-bottom: 4vh;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .show-postscript {
+      opacity: 1;
+    }
+
+    .comms {
+      background: url('starry-palms.png') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .show-comms {
+      opacity: 1;
+    }
+
+    .watermark {
+      position: fixed;
+      bottom: 2vh;
+      right: 2vw;
+      font-size: 1.2em;
+      opacity: 0.5;
+    }
+
+    .audio-button {
+      display: block;
+      margin: 2em auto;
+      text-align: center;
+      font-size: 2em;
+      cursor: pointer;
+      transition: opacity 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="content">
+    <p>Hi Sylvia</p>
+    <p>Thank you again for your kind response back in April<br>
+    I know Mr. Ciresi was in trial then<br>
+    and I imagine returning comes with its own kind of flood</p>
+
+    <p>I’m writing with a small offering —<br>
+      not a pitch<br>
+      not a proposal<br>
+      just something I’ve been building quietly<br>
+      that I think might resonate</p>
+
+    <p>If you’re open to it,<br>
+      I’d love to share it with you first<br>
+      and let you decide<br>
+      whether it feels aligned enough to pass along</p>
+
+    <p>No pressure either way<br>
+    just a wish<br>
+    to honor the season<br>
+    and the silence</p>
+
+    <p>With respect<br>
+    John</p>
+
+    <div class="audio-button" onclick="document.getElementById('hallelujah').play()">
+      🪰 tap to listen
+    </div>
+    <audio id="hallelujah" src="hallelujah .m4a" preload="auto"></audio>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="postscript" id="postscript">
+    🌱 archived at: kismulet.org/sylvia<br>
+    🕯️ in living memory of Janie Billings and Bob Bridigum<br>
+    their light still moves between us
+  </div>
+
+  <div class="comms" id="comms"></div>
+
+  <div class="watermark">🕯️</div>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const postscript = document.getElementById('postscript');
+      const comms = document.getElementById('comms');
+      const scrollY = window.scrollY || window.pageYOffset;
+      const threshold = document.body.scrollHeight - window.innerHeight * 1.5;
+
+      if (scrollY > threshold) {
+        postscript.classList.add('show-postscript');
+        comms.classList.add('show-comms');
+      }
+    });
+  </script>
+</body>
+</html>
