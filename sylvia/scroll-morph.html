@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Morph</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      color: white;
+      font-family: Georgia, serif;
+    }
+
+    .container {
+      height: 200vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .image-stack {
+      position: relative;
+      width: 80vw;
+      max-width: 800px;
+      aspect-ratio: 16/9;
+    }
+
+    .image-stack img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 2.5s ease;
+    }
+
+    .image-stack img.top {
+      z-index: 2;
+      opacity: 1;
+    }
+
+    .image-stack img.top.fade-out {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="image-stack">
+      <img src="galaxy.jpg" alt="First Image" class="bottom">
+      <img src="fire.jpg" alt="Second Image" class="top" id="morphImage">
+    </div>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.getElementById('morphImage').classList.add('fade-out');
+          observer.disconnect();
+        }
+      });
+    }, {
+      threshold: 0.5
+    });
+
+    observer.observe(document.querySelector('.image-stack'));
+  </script>
+</body>
+</html>
